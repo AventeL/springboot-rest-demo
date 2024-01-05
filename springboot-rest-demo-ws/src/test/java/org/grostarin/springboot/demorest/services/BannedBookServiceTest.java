@@ -2,6 +2,7 @@ package org.grostarin.springboot.demorest.services;
 
 import org.grostarin.springboot.demorest.domain.BannedBook;
 import org.grostarin.springboot.demorest.repositories.BannedBookRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,6 +16,12 @@ class BannedBookServiceTest {
     private BannedBookRepository bannedBookRepository;
     @Autowired
     private BannedBookService bannedBookService;
+
+    @BeforeEach
+    void setUp() {
+        bannedBookRepository.deleteAll();
+    }
+
     @Test
     void isBanned() {
         BannedBook bannedBook = new BannedBook("title", "author");
