@@ -3,6 +3,7 @@ package org.grostarin.springboot.demorest.services;
 import org.grostarin.springboot.demorest.domain.BannedBook;
 import org.grostarin.springboot.demorest.domain.Book;
 import org.grostarin.springboot.demorest.exceptions.BookBannedException;
+import org.grostarin.springboot.demorest.exceptions.BookIdMismatchException;
 import org.grostarin.springboot.demorest.repositories.BannedBookRepository;
 import org.grostarin.springboot.demorest.repositories.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,4 +45,11 @@ class BookServiceTest {
         assertThatExceptionOfType(DataIntegrityViolationException.class).isThrownBy(() -> bookService.create(toCreate));
     }
 
+    @Test
+    public void testUpdateBookWithWrongId() {
+        Book toCreate = new Book("title", "author");
+        toCreate.setId(1L);
+        bookService.create(toCreate);
+        assertThrows(BookIdMismatchException.class, (() -> bookService.updateBook(toCreate, 2L)));
+    }
 }
