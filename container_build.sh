@@ -1,2 +1,2 @@
-#!/bin/sh sh
+#!/bin/sh
 docker build -t librarytp:latest .

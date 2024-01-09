@@ -52,7 +52,7 @@ class BookServiceTest {
         Book toCreate = new Book("title", "author");
         toCreate.setId(1L);
         bookService.create(toCreate);
-        assertThrows(BookIdMismatchException.class, (() -> bookService.updateBook(toCreate, 1L)));
+        assertThrows(BookIdMismatchException.class, (() -> bookService.updateBook(toCreate, 2L)));
     }
 
     @Test
